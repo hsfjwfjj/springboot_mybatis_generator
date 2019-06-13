@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 引入 properties 配置文件 -->
+    <properties resource="application.properties"/>
+    <!-- 数据库链接驱动包 -->
+    <classPathEntry location="${generator.location}" />
+    <context id="MyPostgresTables" targetRuntime="MyBatis3">
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8" />
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+        <!-- 为生成的Java模型类添加序列化接口 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <!-- 取消注释 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false" />
+        </commentGenerator>
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}" />
+
+        <!-- java类型处理器 用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl； 注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型； -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- targetProject:生成PO类的位置 -->
+        <javaModelGenerator targetPackage="com.py.model"
+                            targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="postgres"
+                         targetProject="src/main/resources/mapper">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.py.mapper"
+                             targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        <!-- 指定数据库表 -->
+        <!--<table schema="" tableName="biz_safe_dept" domainObjectName="Dept"></table>-->
+        <!--<table schema="" tableName="biz_safe_duty" domainObjectName="Duty"></table>-->
+        <!--<table schema="" tableName="biz_safe_oper" domainObjectName="Oper"></table>-->
+        <!--<table schema="" tableName="biz_safe_sum_item" domainObjectName="SumItem"></table>-->
+        <!--<table schema="" tableName="biz_safe_task_att_info" domainObjectName="TaskAttInfo"></table>-->
+        <!--<table schema="" tableName="biz_safe_task_xb" domainObjectName="TaskXb"></table>-->
+        <!--<table schema="" tableName="biz_safe_task_fp" domainObjectName="TaskFp"></table>-->
+        <table schema="" tableName="biz_safe_task_info" domainObjectName="TaskInfo"></table>
+        <!--<table schema="" tableName="biz_safe_task_label" domainObjectName="TaskLabel"></table>-->
+        <!--<table schema="" tableName="biz_safe_task_message" domainObjectName="TaskMessage"></table>-->
+        <!--<table schema="" tableName="biz_safe_task_progress" domainObjectName="TaskProgress"></table>-->
+        <!--<table schema="" tableName="biz_safe_task_trace" domainObjectName="TaskTrace"></table>-->
+        <!-- 有些表的字段需要指定java类型
+        <table schema="" tableName="">
+            <columnOverride column="" javaType="" />
+        </table> -->
+    </context>
+</generatorConfiguration>
